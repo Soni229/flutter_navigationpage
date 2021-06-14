@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:navig/newNewpage.dart';
 
 // ignore: camel_case_types
-class classnewPage extends StatefulWidget {
+class About extends StatefulWidget {
   @override
-  _classnewPageState createState() => _classnewPageState();
+  _AboutState createState() => _AboutState();
 }
 
 // ignore: camel_case_types
-class _classnewPageState extends State<classnewPage> {
+class _AboutState extends State<About> {
   void newnewpage(
       {required BuildContext context, bool fullscreenDialog = false}) {
     Navigator.push(
@@ -28,10 +28,10 @@ class _classnewPageState extends State<classnewPage> {
               onPressed: () =>
                   newnewpage(context: context, fullscreenDialog: true))
         ],
-        title: Text("Newpage"),
+        title: Text("About"),
       ),
       body: Container(
-        child: Text('Voici ma nouvelle page'),
+        child: Text('This is the about page'),
       ),
     );
   }

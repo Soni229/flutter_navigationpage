@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navig/newpage.dart';
+import 'package:navig/gratitude.dart';
 
 class MaPageMaison extends StatefulWidget {
   @override
@@ -7,15 +8,26 @@ class MaPageMaison extends StatefulWidget {
 }
 
 class _MaPageMaisonState extends State<MaPageMaison> {
-  void opennewPage(
+  String _howAreYou = "..";
+  void gotoaboutPage(
       {required BuildContext context, bool fullscreenDialog = false}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => classnewPage()),
+      MaterialPageRoute(builder: (context) => About()),
     );
     fullscreenDialog = fullscreenDialog;
   }
 
+  void _openPageGratitude(
+      {required BuildContext context, bool fullscreenDialog = false}) async {
+    final _gratitudeResponse = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          fullscreenDialog: fullscreenDialog,
+          builder: (context) => Gratitude(radioGroupValue: -1, key: null)),
+    );
+    _howAreYou = _gratitudeResponse;
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +37,22 @@ class _MaPageMaisonState extends State<MaPageMaison> {
           IconButton(
             icon: Icon(Icons.info_outline),
             onPressed: () =>
-                opennewPage(context: context, fullscreenDialog: true),
+                gotoaboutPage(context: context, fullscreenDialog: true),
           ),
         ],
       ),
-      body: Container(
-        child: Text('Les boss'),
+      body: SafeArea(
+          child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          'Grateful for:$_howAreYou',
+          style: TextStyle(fontSize: 32),
+        ),
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _openPageGratitude(context: context),
+        tooltip: 'About',
+        child: Icon(Icons.sentiment_satisfied),
       ),
     );
   }
